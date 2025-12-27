@@ -2,18 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Joyce | Multi-page Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>John Joyce | Digital Architect</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg: #000000;
             --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-heavy: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
             --accent: #ffffff;
             --text-dim: #888;
         }
@@ -29,81 +30,86 @@
             min-height: 100vh;
         }
 
-        /* --- BACKGROUND LAYER --- */
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
-        .liquid-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; filter: blur(100px); opacity: 0.3; }
-        .blob { position: absolute; background: #555; border-radius: 50%; animation: drift 25s infinite alternate ease-in-out; }
-        .b1 { width: 600px; height: 600px; top: -10%; left: -10%; }
-        .b2 { width: 500px; height: 500px; bottom: -10%; right: -5%; animation-delay: -5s; }
-        @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(150px, 80px) scale(1.2); } }
+        /* --- BACKGROUND --- */
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .liquid-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; filter: blur(120px); opacity: 0.4; }
+        .blob { position: absolute; background: #333; border-radius: 50%; animation: drift 20s infinite alternate ease-in-out; }
+        .b1 { width: 500px; height: 500px; top: -10%; left: -10%; }
+        .b2 { width: 400px; height: 400px; bottom: -10%; right: -5%; animation-delay: -5s; }
+        @keyframes drift { from { transform: translate(0,0); } to { transform: translate(100px, 50px); } }
 
         /* --- NAVIGATION --- */
-        .nav-wrapper { position: fixed; top: 20px; width: 100%; z-index: 1000; padding: 0 20px; }
-        nav {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 100px;
+        .header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
+            max-width: 1200px; left: 50%; transform: translateX(-50%);
         }
-        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: -1px; cursor: pointer; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { 
-            color: var(--text-dim); text-decoration: none; font-size: 0.85rem; 
-            font-weight: 500; transition: 0.3s; padding: 8px 16px; border-radius: 50px;
+        .logo { 
+            font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; 
+            letter-spacing: -1.5px; text-transform: uppercase; cursor: pointer; 
+            white-space: nowrap;
         }
-        .nav-links a:hover, .nav-links a.active { color: #fff; background: var(--glass); }
 
-        /* --- PAGE SYSTEM --- */
+        .nav-dock {
+            display: flex; gap: 5px; background: rgba(10, 10, 10, 0.6); 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 5px; border-radius: 100px; border: 1px solid var(--border);
+        }
+        .nav-dock a {
+            color: var(--text-dim); text-decoration: none; font-size: 0.75rem; font-weight: 600;
+            padding: 10px 18px; border-radius: 100px; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .nav-dock a.active, .nav-dock a:hover { color: #fff; background: var(--glass-heavy); }
+
+        /* --- MOBILE NAVIGATION --- */
+        @media (max-width: 768px) {
+            .header { padding: 20px; justify-content: center; }
+            .nav-dock {
+                position: fixed; bottom: 30px; top: auto; left: 50%; transform: translateX(-50%);
+                width: 90%; max-width: 360px; justify-content: space-around;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            }
+            .nav-dock a { padding: 12px 8px; font-size: 0.7rem; }
+        }
+
+        /* --- CONTENT --- */
         .page {
-            display: none;
-            position: relative;
-            z-index: 10;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 140px 20px 100px;
-            animation: fadeIn 0.6s ease forwards;
+            display: none; position: relative; z-index: 10;
+            max-width: 1000px; margin: 0 auto; padding: 140px 24px 100px;
+            animation: fadeIn 0.6s ease-out;
         }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- TYPOGRAPHY --- */
-        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 12vw, 8rem); line-height: 0.85; margin-bottom: 30px; letter-spacing: -0.05em; text-transform: uppercase; }
-        h2 { font-family: 'Syne', sans-serif; font-size: 3rem; margin-bottom: 40px; text-transform: uppercase; }
-        p { color: var(--text-dim); line-height: 1.7; font-size: 1.1rem; }
-
-        /* --- ELEMENTS --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 50px; }
-        .card { 
-            background: var(--glass); border: 1px solid var(--glass-border); 
-            padding: 40px; border-radius: 40px; backdrop-filter: blur(10px); 
-            transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1); 
-        }
-        .card:hover { transform: translateY(-10px); border-color: #fff; }
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 12vw, 8rem); line-height: 0.85; letter-spacing: -0.06em; text-transform: uppercase; margin-bottom: 30px; }
+        h2 { font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 30px; letter-spacing: -2px; text-transform: uppercase; }
         
-        .btn { 
-            display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000; 
-            padding: 18px 35px; border-radius: 100px; text-decoration: none; font-weight: 700; margin-top: 30px;
+        .sub { color: var(--text-dim); font-size: 1.2rem; max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 40px; border-radius: 40px; backdrop-filter: blur(15px);
+            transition: 0.4s;
         }
+        .card:hover { transform: translateY(-10px); border-color: #fff; background: rgba(255,255,255,0.05); }
+        .card h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; margin-bottom: 12px; letter-spacing: -1px; }
+        .card p { color: var(--text-dim); line-height: 1.5; font-size: 1rem; }
 
-        .tag { display: inline-block; padding: 5px 15px; background: var(--glass); border-radius: 50px; font-size: 0.8rem; margin-bottom: 15px; color: #fff; border: 1px solid var(--glass-border); }
-
-        /* --- SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-
-        @media (max-width: 768px) {
-            .nav-links { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); padding: 10px; width: 90%; justify-content: center; }
-            h1 { font-size: 4rem; }
-            h2 { font-size: 2rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000;
+            padding: 20px 40px; border-radius: 100px; text-decoration: none; font-weight: 700;
+            transition: 0.3s; margin-top: 20px;
         }
+        .btn:hover { transform: scale(1.05); }
+
+        /* --- FOOTER --- */
+        .footer-content { text-align: center; padding: 80px 0; }
+        .tg-big { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 10vw, 5.5rem); color: #fff; text-decoration: none; display: block; margin: 30px 0; transition: 0.3s; }
+        .tg-big:hover { opacity: 0.6; }
+        .stars-badge { display: inline-block; padding: 8px 20px; background: var(--glass-heavy); border-radius: 50px; border: 1px solid var(--border); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+
     </style>
 </head>
 <body>
@@ -111,110 +117,92 @@
     <div id="particles-js"></div>
     <div class="liquid-bg"><div class="blob b1"></div><div class="blob b2"></div></div>
 
-    <div class="nav-wrapper">
-        <nav>
-            <div class="logo" onclick="showPage('home')">JOYCE.SYS</div>
-            <div class="nav-links">
-                <a href="#" onclick="showPage('home')" id="link-home" class="active">Home</a>
-                <a href="#" onclick="showPage('work')" id="link-work">Work</a>
-                <a href="#" onclick="showPage('about')" id="link-about">About</a>
-                <a href="#" onclick="showPage('contact')" id="link-contact">Contact</a>
-            </div>
-        </nav>
-    </div>
+    <header class="header">
+        <div class="logo" onclick="showPage('home')">Joyce.sys</div>
+        <div class="nav-dock">
+            <a href="#" onclick="showPage('home')" id="link-home" class="active">Home</a>
+            <a href="#" onclick="showPage('work')" id="link-work">Work</a>
+            <a href="#" onclick="showPage('about')" id="link-about">About</a>
+            <a href="#" onclick="showPage('contact')" id="link-contact">Contact</a>
+        </div>
+    </header>
 
     <main id="home" class="page active">
         <h1>John<br>Joyce</h1>
-        <p style="max-width: 600px;">Independent architect creating high-performance digital systems and collecting rare artifacts in the Web3 space. Based in London, operating globally.</p>
+        <p class="sub">London based Senior Developer & Digital Architect. Специализируюсь на создании сложных систем и инвестициях в NFT.</p>
+        
         <div class="grid">
             <div class="card">
-                <h3>System Architecture</h3>
-                <p>Designing scalable backends and smooth frontends for modern enterprises.</p>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-bottom:20px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                <h3>NFT Buyer</h3>
+                <p>Активно выкупаю ликвидные и редкие NFT. Анализирую рынок, ищу уникальные активы для коллекции.</p>
             </div>
             <div class="card">
-                <h3>NFT Collection</h3>
-                <p>Strategic acquisition of digital art. Focused on utility and long-term rarity.</p>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-bottom:20px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <h3>Review Stars</h3>
+                <p>Ценю доверие. За каждый содержательный отзыв о сделке или работе начисляю Stars в Telegram.</p>
             </div>
         </div>
-        <a href="#" onclick="showPage('work')" class="btn">View Portfolio</a>
+        
+        <a href="#" onclick="showPage('contact')" class="btn">Связаться со мной</a>
     </main>
 
     <main id="work" class="page">
-        <h2>Portfolio</h2>
-        <p>A selection of projects where code meets art.</p>
+        <h2>Artifacts</h2>
         <div class="grid">
             <div class="card">
-                <div class="tag">Next.js / Rust</div>
-                <h3>DEX Dashboard</h3>
-                <p>A high-frequency trading interface for decentralized exchanges.</p>
+                <h3>Smart Vault</h3>
+                <p>Разработка защищенных протоколов хранения активов.</p>
             </div>
             <div class="card">
-                <div class="tag">Solidity</div>
-                <h3>Smart Contract Suite</h3>
-                <p>Audited contracts for a major NFT drop with 10k unique assets.</p>
+                <h3>Liquid UI</h3>
+                <p>Создание премиальных интерфейсов с физикой жидкости.</p>
             </div>
             <div class="card">
-                <div class="tag">Three.js</div>
-                <h3>3D Metaverse Portal</h3>
-                <p>Interactive web-based 3D environment with liquid physics.</p>
+                <h3>Blockchain Dev</h3>
+                <p>Полный цикл разработки DApps и смарт-контрактов.</p>
             </div>
         </div>
     </main>
 
     <main id="about" class="page">
-        <h2>Biography</h2>
-        <p style="margin-bottom: 30px;">Born from the world of low-level programming and high-end design. John Joyce has spent over a decade perfecting the balance between technical stability and visual chaos.</p>
-        <div class="card" style="margin-bottom: 30px;">
-            <h3>The Mission</h3>
-            <p>To remove the "boring" from the internet. I believe every application should feel like a piece of living art, even if it's a banking app.</p>
-        </div>
+        <h2>The Architect</h2>
+        <p class="sub">Базируюсь в Лондоне. Объединяю строгий технический подход с современным цифровым искусством.</p>
         <div class="card">
-            <h3>London Studio</h3>
-            <p>My physical base is in London, where I collaborate with local tech hubs and host networking sessions for NFT collectors.</p>
+            <p style="color:#fff; margin-bottom:15px;">Experience: 8+ Years</p>
+            <p style="color:#fff; margin-bottom:15px;">Location: London, UK</p>
+            <p style="color:#fff;">Stack: Rust, Go, TypeScript, Solidity</p>
         </div>
     </main>
 
-    <main id="contact" class="page" style="text-align: center;">
-        <h2>Let's Talk</h2>
-        <p>I am currently open for new projects and NFT acquisitions.</p>
-        <div style="margin: 60px 0;">
-            <a href="https://t.me/DmJohnRent" target="_blank" style="font-family: 'Syne', sans-serif; font-size: clamp(2rem, 8vw, 5rem); color: #fff; text-decoration: none;">@DmJohnRent</a>
+    <main id="contact" class="page">
+        <div class="footer-content">
+            <div class="stars-badge">Every review = Telegram Stars</div>
+            <p style="color:var(--text-dim); text-transform:uppercase; letter-spacing:3px;">Let's build together</p>
+            <a href="https://t.me/DmJohnRent" target="_blank" class="tg-big">@DmJohnRent</a>
+            <p class="sub" style="margin: 0 auto;">Открыт для предложений по покупке NFT и разработке уникальных IT-решений.</p>
+            <p style="margin-top:100px; opacity:0.2; font-size:0.7rem; letter-spacing:2px;">© 2025 JOYCE SYSTEMS</p>
         </div>
-        <p style="text-transform: uppercase; letter-spacing: 5px; font-size: 0.8rem;">Every review = Telegram Stars</p>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Particles initialization
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
                 "opacity": { "value": 0.2 },
                 "size": { "value": 2 },
                 "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
                 "move": { "enable": true, "speed": 1 }
-            },
-            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
+            }
         });
 
-        // Page Switching Logic
         function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            // Show target page
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            
-            // Update nav links
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-            });
+            document.querySelectorAll('.nav-dock a').forEach(a => a.classList.remove('active'));
             document.getElementById('link-' + pageId).classList.add('active');
-            
-            // Scroll to top
             window.scrollTo(0, 0);
         }
     </script>
