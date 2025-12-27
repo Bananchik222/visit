@@ -34,16 +34,17 @@
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .liquid-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; filter: blur(120px); opacity: 0.4; }
         .blob { position: absolute; background: #333; border-radius: 50%; animation: drift 20s infinite alternate ease-in-out; }
-        .b1 { width: 500px; height: 500px; top: -10%; left: -10%; }
-        .b2 { width: 400px; height: 400px; bottom: -10%; right: -5%; animation-delay: -5s; }
+        .b1 { width: 400px; height: 400px; top: -10%; left: -10%; }
+        .b2 { width: 300px; height: 300px; bottom: -10%; right: -5%; animation-delay: -5s; }
         @keyframes drift { from { transform: translate(0,0); } to { transform: translate(100px, 50px); } }
 
-        /* --- NAVIGATION --- */
+        /* --- DESKTOP NAVIGATION --- */
         .header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
             max-width: 1200px; left: 50%; transform: translateX(-50%);
         }
+
         .logo { 
             font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; 
             letter-spacing: -1.5px; text-transform: uppercase; cursor: pointer; 
@@ -51,64 +52,83 @@
         }
 
         .nav-dock {
-            display: flex; gap: 5px; background: rgba(10, 10, 10, 0.6); 
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 5px; border-radius: 100px; border: 1px solid var(--border);
+            display: flex; gap: 5px; background: rgba(15, 15, 15, 0.7); 
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            padding: 6px; border-radius: 100px; border: 1px solid var(--border);
         }
+
         .nav-dock a {
             color: var(--text-dim); text-decoration: none; font-size: 0.75rem; font-weight: 600;
-            padding: 10px 18px; border-radius: 100px; transition: 0.3s;
+            padding: 10px 20px; border-radius: 100px; transition: 0.3s;
             text-transform: uppercase; letter-spacing: 0.5px;
         }
+
         .nav-dock a.active, .nav-dock a:hover { color: #fff; background: var(--glass-heavy); }
 
-        /* --- MOBILE NAVIGATION --- */
+        /* --- MOBILE REPAIR (ДЛЯ ТЕЛЕФОНОВ) --- */
         @media (max-width: 768px) {
-            .header { padding: 20px; justify-content: center; }
-            .nav-dock {
-                position: fixed; bottom: 30px; top: auto; left: 50%; transform: translateX(-50%);
-                width: 90%; max-width: 360px; justify-content: space-around;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            .header { 
+                padding: 25px 0; 
+                justify-content: center; 
+                background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
             }
-            .nav-dock a { padding: 12px 8px; font-size: 0.7rem; }
+
+            /* Меню переносим в нижнюю часть экрана */
+            .nav-dock {
+                position: fixed; 
+                bottom: 30px; 
+                top: auto; 
+                left: 50%; 
+                transform: translateX(-50%);
+                width: 90%; 
+                max-width: 400px; 
+                justify-content: space-around;
+                box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+                padding: 8px;
+            }
+
+            .nav-dock a { padding: 12px 10px; font-size: 0.65rem; }
+
+            .page { 
+                padding-top: 100px; /* Отступ сверху, чтобы контент не был под логотипом */
+                padding-bottom: 120px; /* Отступ снизу под меню */
+            }
         }
 
         /* --- CONTENT --- */
         .page {
             display: none; position: relative; z-index: 10;
-            max-width: 1000px; margin: 0 auto; padding: 140px 24px 100px;
-            animation: fadeIn 0.6s ease-out;
+            max-width: 900px; margin: 0 auto; padding: 140px 24px 100px;
+            animation: fadeIn 0.5s ease-out;
         }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 12vw, 8rem); line-height: 0.85; letter-spacing: -0.06em; text-transform: uppercase; margin-bottom: 30px; }
-        h2 { font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 30px; letter-spacing: -2px; text-transform: uppercase; }
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 12vw, 7.5rem); line-height: 0.85; letter-spacing: -0.06em; text-transform: uppercase; margin-bottom: 30px; }
+        h2 { font-family: 'Syne', sans-serif; font-size: 2.2rem; margin-bottom: 30px; letter-spacing: -1.5px; text-transform: uppercase; }
         
-        .sub { color: var(--text-dim); font-size: 1.2rem; max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
+        .sub { color: var(--text-dim); font-size: 1.1rem; max-width: 550px; line-height: 1.6; margin-bottom: 40px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card {
             background: var(--glass); border: 1px solid var(--border);
-            padding: 40px; border-radius: 40px; backdrop-filter: blur(15px);
+            padding: 35px; border-radius: 40px; backdrop-filter: blur(15px);
             transition: 0.4s;
         }
-        .card:hover { transform: translateY(-10px); border-color: #fff; background: rgba(255,255,255,0.05); }
-        .card h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; margin-bottom: 12px; letter-spacing: -1px; }
-        .card p { color: var(--text-dim); line-height: 1.5; font-size: 1rem; }
+        .card:hover { transform: translateY(-8px); border-color: #fff; background: rgba(255,255,255,0.05); }
+        .card h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .card p { color: var(--text-dim); line-height: 1.5; font-size: 0.95rem; }
 
         .btn {
             display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000;
-            padding: 20px 40px; border-radius: 100px; text-decoration: none; font-weight: 700;
-            transition: 0.3s; margin-top: 20px;
+            padding: 18px 35px; border-radius: 100px; text-decoration: none; font-weight: 700;
+            transition: 0.3s; margin-top: 10px; font-size: 0.9rem;
         }
-        .btn:hover { transform: scale(1.05); }
 
         /* --- FOOTER --- */
-        .footer-content { text-align: center; padding: 80px 0; }
-        .tg-big { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 10vw, 5.5rem); color: #fff; text-decoration: none; display: block; margin: 30px 0; transition: 0.3s; }
-        .tg-big:hover { opacity: 0.6; }
-        .stars-badge { display: inline-block; padding: 8px 20px; background: var(--glass-heavy); border-radius: 50px; border: 1px solid var(--border); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+        .footer-content { text-align: center; padding: 60px 0; }
+        .tg-big { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 9vw, 5rem); color: #fff; text-decoration: none; display: block; margin: 25px 0; transition: 0.3s; word-break: break-all; }
+        .stars-badge { display: inline-block; padding: 10px 22px; background: var(--glass-heavy); border-radius: 50px; border: 1px solid var(--border); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: #fff; }
 
     </style>
 </head>
@@ -133,18 +153,18 @@
         
         <div class="grid">
             <div class="card">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-bottom:20px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-bottom:15px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                 <h3>NFT Buyer</h3>
                 <p>Активно выкупаю ликвидные и редкие NFT. Анализирую рынок, ищу уникальные активы для коллекции.</p>
             </div>
             <div class="card">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-bottom:20px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-bottom:15px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 <h3>Review Stars</h3>
                 <p>Ценю доверие. За каждый содержательный отзыв о сделке или работе начисляю Stars в Telegram.</p>
             </div>
         </div>
         
-        <a href="#" onclick="showPage('contact')" class="btn">Связаться со мной</a>
+        <a href="#" onclick="showPage('contact')" class="btn">Связаться @DmJohnRent</a>
     </main>
 
     <main id="work" class="page">
@@ -152,15 +172,15 @@
         <div class="grid">
             <div class="card">
                 <h3>Smart Vault</h3>
-                <p>Разработка защищенных протоколов хранения активов.</p>
+                <p>Разработка защищенных протоколов хранения активов в сети Ethereum.</p>
             </div>
             <div class="card">
                 <h3>Liquid UI</h3>
-                <p>Создание премиальных интерфейсов с физикой жидкости.</p>
+                <p>Создание премиальных интерфейсов с физикой жидкости и Blur эффектами.</p>
             </div>
             <div class="card">
                 <h3>Blockchain Dev</h3>
-                <p>Полный цикл разработки DApps и смарт-контрактов.</p>
+                <p>Полный цикл разработки DApps и кастомных смарт-контрактов.</p>
             </div>
         </div>
     </main>
@@ -169,8 +189,8 @@
         <h2>The Architect</h2>
         <p class="sub">Базируюсь в Лондоне. Объединяю строгий технический подход с современным цифровым искусством.</p>
         <div class="card">
-            <p style="color:#fff; margin-bottom:15px;">Experience: 8+ Years</p>
-            <p style="color:#fff; margin-bottom:15px;">Location: London, UK</p>
+            <p style="color:#fff; margin-bottom:12px;">Experience: 8+ Years</p>
+            <p style="color:#fff; margin-bottom:12px;">Location: London, UK</p>
             <p style="color:#fff;">Stack: Rust, Go, TypeScript, Solidity</p>
         </div>
     </main>
@@ -178,10 +198,10 @@
     <main id="contact" class="page">
         <div class="footer-content">
             <div class="stars-badge">Every review = Telegram Stars</div>
-            <p style="color:var(--text-dim); text-transform:uppercase; letter-spacing:3px;">Let's build together</p>
+            <p style="color:var(--text-dim); text-transform:uppercase; letter-spacing:3px; font-size: 0.8rem;">Let's build together</p>
             <a href="https://t.me/DmJohnRent" target="_blank" class="tg-big">@DmJohnRent</a>
-            <p class="sub" style="margin: 0 auto;">Открыт для предложений по покупке NFT и разработке уникальных IT-решений.</p>
-            <p style="margin-top:100px; opacity:0.2; font-size:0.7rem; letter-spacing:2px;">© 2025 JOYCE SYSTEMS</p>
+            <p class="sub" style="margin: 0 auto; font-size: 0.95rem;">Открыт для предложений по покупке NFT и разработке уникальных IT-решений.</p>
+            <p style="margin-top:80px; opacity:0.2; font-size:0.6rem; letter-spacing:2px;">© 2025 JOYCE SYSTEMS | LONDON</p>
         </div>
     </main>
 
@@ -189,7 +209,7 @@
     <script>
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ffffff" },
                 "opacity": { "value": 0.2 },
                 "size": { "value": 2 },
@@ -202,7 +222,8 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             document.querySelectorAll('.nav-dock a').forEach(a => a.classList.remove('active'));
-            document.getElementById('link-' + pageId).classList.add('active');
+            const currentLink = document.getElementById('link-' + pageId);
+            if(currentLink) currentLink.classList.add('active');
             window.scrollTo(0, 0);
         }
     </script>
